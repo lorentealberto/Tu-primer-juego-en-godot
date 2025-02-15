@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmw3iuxsimn3r"]
+
+[ext_resource type="Script" path="res://scripts/fruit.gd" id="1_cktw1"]
+[ext_resource type="Texture2D" uid="uid://c88leuvqw85v2" path="res://assets/graphics/spritesheet.png" id="1_xlhw0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q8lcx"]
+radius = 4.12311
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g2y0k"]
+radius = 2.23607
+
+[node name="Fruit" type="CharacterBody2D"]
+script = ExtResource("1_cktw1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xlhw0")
+hframes = 6
+vframes = 4
+frame = 11
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_q8lcx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_g2y0k")
+debug_color = Color(0.973685, 0, 0.432218, 0.42)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

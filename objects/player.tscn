@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0dpxi71rx16i"]
+
+[ext_resource type="Texture2D" uid="uid://c88leuvqw85v2" path="res://assets/graphics/spritesheet.png" id="1_4k1el"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_r2t37"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4qny3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xlc8s"]
+size = Vector2(16, 16)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_r2t37")
+
+[node name="Character" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_4k1el")
+hframes = 6
+vframes = 4
+frame = 1
+
+[node name="Basket" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+scale = Vector2(2, 2)
+texture = ExtResource("1_4k1el")
+hframes = 6
+vframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_4qny3")
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_xlc8s")

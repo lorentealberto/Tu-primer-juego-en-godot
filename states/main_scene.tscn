@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://b3ss0gh2oi07t"]
+
+[ext_resource type="Texture2D" uid="uid://bjugvqhwhh4cp" path="res://assets/graphics/suelo.png" id="1_i46rl"]
+[ext_resource type="PackedScene" uid="uid://c0dpxi71rx16i" path="res://objects/player.tscn" id="2_bf3b1"]
+[ext_resource type="PackedScene" uid="uid://cmw3iuxsimn3r" path="res://objects/fruit.tscn" id="3_vxy8k"]
+[ext_resource type="Script" path="res://scripts/fruit_spawner.gd" id="4_lonw5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fttkj"]
+size = Vector2(128, 16)
+
+[node name="MainScene" type="Node2D"]
+
+[node name="FruitSpawner" type="Node" parent="."]
+script = ExtResource("4_lonw5")
+fruit = ExtResource("3_vxy8k")
+
+[node name="Timer" type="Timer" parent="FruitSpawner"]
+autostart = true
+
+[node name="Floor" type="Sprite2D" parent="." groups=["floor"]]
+position = Vector2(0, 115)
+texture = ExtResource("1_i46rl")
+centered = false
+
+[node name="HitBox" type="Area2D" parent="Floor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/HitBox"]
+position = Vector2(64, 8)
+shape = SubResource("RectangleShape2D_fttkj")
+
+[node name="Player" parent="." instance=ExtResource("2_bf3b1")]
+position = Vector2(64, 107)
+
+[connection signal="timeout" from="FruitSpawner/Timer" to="FruitSpawner" method="_on_timer_timeout"]
